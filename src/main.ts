@@ -66,6 +66,13 @@ async function run() {
         console.warn(`🤔 ${config.input_files} not include valid file.`);
       }
       const currentAssets = rel.assets;
+	  
+	  // Verify if upload_url is provided by API or not
+	  if(rel.upload_url === undefined)
+	  {
+		rel.upload_url = env.GITHUB_API_URL + "/repos" + env.GITHUB_OWNER + "/" + env.GITHUB_REPOSITORY + "/releases/" + rel.id + "/assets";
+	  }
+	  
       const assets = await Promise.all(
         files.map(async (path) => {
           const json = await upload(
