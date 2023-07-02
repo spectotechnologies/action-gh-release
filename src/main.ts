@@ -94,7 +94,7 @@ async function run() {
     setOutput("id", rel.id.toString());
     setOutput("upload_url", rel.upload_url);
   } catch (error) {
-    setFailed(error.message);
+    setFailed(error.message + error.stack);
   }
 }
 
